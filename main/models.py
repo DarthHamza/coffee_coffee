@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 class Bean(models.Model):
     name = models.CharField(max_length=200)
@@ -25,6 +26,7 @@ class Powder(models.Model):
         return self.name
 
 class Coffee(models.Model):
+    user = models.ForeignKey(User)
     name = models.CharField(max_length=255)
     bean = models.ForeignKey(Bean)
     roast = models.ForeignKey(Roast)
