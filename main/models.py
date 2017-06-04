@@ -40,3 +40,11 @@ class Coffee(models.Model):
 
     def __str__(self):
         return self.name
+
+class Order(models.Model):
+    user = models.ForeignKey(User)
+    coffee = models.ForeignKey(Coffee)
+    date = models.DateField()
+
+    def __str__(self):
+        return str(self.coffee)

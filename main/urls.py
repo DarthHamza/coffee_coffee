@@ -23,4 +23,6 @@ urlpatterns = [
     url(r'^create_syrup/$', views.create_syrup, name='create_syrup'),
     url(r'^edit_syrup/(?P<syrup_id>[0-9]+)/$', views.edit_syrup, name="edit_syrup"),
     url(r'^delete_syrup/(?P<syrup_id>[0-9]+)/$', views.delete_syrup, name="delete_syrup"),
+
+    url(r'^create_order/(?P<coffee_id>[0-9]+)/$', views.create_order, name="create_order"),
 ]
