@@ -5,7 +5,7 @@
 {% block content %}
     <form action="{% url 'edit_coffee' coffee_id=coffee.id %}" method="post">
       {% csrf_token %}
-      {{form.as_p}}
+      {{form|crispy}}
       <input type="submit" value="Edit Coffee">
     </form>
 {% endblock %}
