@@ -42,3 +42,45 @@ def edit_coffee(request, coffee_id):
         form = CoffeeForm(instance=coff)
         context['form'] = form
         return render(request, 'edit_coffee.html', context)
+
+
+def delete_coffee(request, coffee_id):
+    Coffee.objects.get(id=coffee_id).delete()
+    return redirect("home")
+
+def create_bean(request):
+    context = {}
+    if request.method == "POST":
+        form = BeanForm(request.POST)
+        context['form'] = form
+        if form.is_valid():
+            form.save()
+            return redirect("home")
+        else:
+            return render(request, 'create_bean.html', context)
+    else:
+        form = BeanForm()
+        context['form'] = form
+        return render(request, 'create_bean.html', context)
+
+
+def edit_bean(request, bean_id):
+    context = {}
+    bean = Bean.objects.get(id=bean_id)
+    context['bean']=bean
+    if request.method == "POST":
+        form = BeanForm(request.POST, instance=bean)
+        context['form'] = form
+        if form.is_valid():
+            form.save()
+            return redirect("home")
+        else:
+            return render(request, 'edit_bean.html', context)
+    else:
+        form = BeanForm(instance=bean)
+        context['form'] = form
+        return render(request, 'edit_bean.html', context)
+
+def delete_bean(request, bean_id):
+    Bean.objects.get(id=bean_id).delete()
+    return redirect("home")
