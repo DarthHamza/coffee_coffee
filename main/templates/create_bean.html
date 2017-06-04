@@ -6,6 +6,6 @@
     <form action="{% url 'create_bean' %}" method="post">
       {% csrf_token %}
       {{form|crispy}}
-      <input type="submit" value="Create Bean">
+      <input class="btn btn-primary" type="submit" value="Create Bean">
     </form>
 {% endblock %}

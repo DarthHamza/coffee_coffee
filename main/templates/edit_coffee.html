@@ -6,6 +6,6 @@
     <form action="{% url 'edit_coffee' coffee_id=coffee.id %}" method="post">
       {% csrf_token %}
       {{form|crispy}}
-      <input type="submit" value="Edit Coffee">
+      <input class="btn btn-primary" type="submit" value="Edit Coffee">
     </form>
 {% endblock %}

@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block header %} Edit Syrup {% endblock %}
+
+{% block content %}
+    <form action="{% url 'edit_syrup' syrup_id=syrup.id %}" method="post">
+      {% csrf_token %}
+      {{form|crispy}}
+      <input class="btn btn-primary" type="submit" value="Edit Syrup">
+    </form>
+{% endblock %}
