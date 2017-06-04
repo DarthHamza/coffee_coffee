@@ -27,3 +27,11 @@ class CoffeeForm(forms.ModelForm):
         model = Coffee
         fields = "__all__"
         exclude = ['user',]
+
+class OrderForm(forms.ModelForm):
+    class Meta:
+        model = Order
+        fields = ["date"]
+        widgets = {
+        'date':forms.DateInput(attrs={"type":'date'}),
+        }
