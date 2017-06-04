@@ -1,14 +1,11 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <title>Edit Coffee</title>
-  </head>
-  <body>
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block header %} Edit Coffee {% endblock %}
+
+{% block content %}
     <form action="{% url 'edit_coffee' coffee_id=coffee.id %}" method="post">
       {% csrf_token %}
-      {{form.as_p}}
-      <input type="submit" value="Edit Coffee">
+      {{form|crispy}}
+      <input class="btn btn-primary" type="submit" value="Edit Coffee">
     </form>
-  </body>
-</html>
+{% endblock %}
