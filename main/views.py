@@ -1,8 +1,29 @@
 from django.shortcuts import render, redirect
 from .forms import *
+import datetime
 
 def home(request):
-    return render(request, 'home.html', {})
+    context = {}
+    user = request.user
+    context['user'] = user
+    if request.method=="POST":
+        form = SearchForm(request.POST)
+        context['form']=form
+        if form.is_valid():
+            date = form.cleaned_data['date']
+            context['today']=date
+            order_list = Order.objects.filter(user=user, date=date)
+            context['order_list']=order_list
+    else:
+        form = SearchForm()
+        context['form']=form
+        today = datetime.date.today()
+        context['today']=today
+        order_list = Order.objects.filter(user=user, date=today)
+        context['order_list']=order_list
+    coffee_list = Coffee.objects.filter(user=user)
+    context['coffee_list']=coffee_list
+    return render(request, 'home.html', context)
 
 def create_coffee(request):
     context = {}
