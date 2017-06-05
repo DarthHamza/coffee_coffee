@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect
 from .forms import *
 import datetime
+from django.core.mail import send_mail
+from django.conf import settings
 
 def home(request):
     context = {}
@@ -236,3 +238,17 @@ def create_order(request, coffee_id):
         form = OrderForm()
         context['form'] = form
         return render(request, 'create_order.html', context)
+
+def place_order(request, year, month, day):
+    context = {}
+    date = datetime.datetime.strptime('%s%s%s'%(year, month, day), "%Y%m%d").date()
+    order_list=Order.objects.filter(user=request.user, date=date)
+    subject = "My Coffee Orders:"
+    message = ""
+    for order in order_list:
+        message += "%s \n"%(order.coffee)
+    send_mail(subject, message, settings.EMAIL_HOST_USER, ['hashim@joincoded.com','alsaff1987@gmail.com'])
+    return redirect("home")
+
+def replicate_order(request, year, month, day):
+    return redirect("home")
