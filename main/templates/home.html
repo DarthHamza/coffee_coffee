@@ -5,6 +5,11 @@
 {% block content %}
 <div class="row">
   <h1>Orders: {{today}}</h1>
+  <form class="" action="{% url 'home' %}" method="post">
+    {% csrf_token %}
+    {{form}}
+    <input type="submit" class="btn btn-default" value="Search">
+  </form>
   <hr>
   {% for order in order_list %}
     <div class="col-sm-6 col-md-4">

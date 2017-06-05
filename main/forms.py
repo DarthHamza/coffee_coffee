@@ -35,3 +35,6 @@ class OrderForm(forms.ModelForm):
         widgets = {
         'date':forms.DateInput(attrs={"type":'date'}),
         }
+
+class SearchForm(forms.Form):
+    date = forms.DateField(widget = forms.DateInput(attrs={"type":"date"}))
