@@ -3,5 +3,35 @@
 {% block header %} Welcome {% endblock %}
 
 {% block content %}
-
+<div class="row">
+  <h1>Orders: {{today}}</h1>
+  <hr>
+  {% for order in order_list %}
+    <div class="col-sm-6 col-md-4">
+      <div class="thumbnail">
+        <div class="caption">
+          <h3>{{order.coffee}}</h3>
+        </div>
+      </div>
+    </div>
+  {% endfor %}
+</div>
+<div class="row">
+  <h1>My Coffees'</h1>
+  <hr>
+  {% for coffee in coffee_list %}
+    <div class="col-sm-6 col-md-4">
+      <div class="thumbnail">
+        <div class="caption">
+          <h3>{{coffee.name}}</h3>
+          <p>
+            <a href="{% url 'edit_coffee' coffee_id=coffee.id %}" class="btn btn-primary" role="button">Edit</a>
+            <a href="{% url 'delete_coffee' coffee_id=coffee.id %}" class="btn btn-danger" role="button">Delete</a>
+            <a href="{% url 'create_order' coffee_id=coffee.id %}" class="btn btn-success" role="button">Order</a>
+          </p>
+        </div>
+      </div>
+    </div>
+  {% endfor %}
+</div>
 {% endblock %}
