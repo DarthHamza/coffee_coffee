@@ -251,4 +251,19 @@ def place_order(request, year, month, day):
     return redirect("home")
 
 def replicate_order(request, year, month, day):
-    return redirect("home")
+    context = {}
+    date = datetime.datetime.strptime('%s%s%s'%(year, month, day), "%Y%m%d").date()
+    context['date']=date
+    if request.method=="POST":
+        form = SearchForm(request.POST)
+        context['form']=form
+        if form.is_valid():
+            order_list=Order.objects.filter(user=request.user, date=date)
+            for order in order_list:
+                new_order = Order(user=order.user, coffee=order.coffee, date=form.cleaned_data['date'])
+                new_order.save()
+        return redirect("home")
+    else:
+        form = SearchForm()
+        context['form']=form
+    return render(request, 'replicate_order.html', context)

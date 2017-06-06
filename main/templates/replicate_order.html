@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block header %} Replicate Order {% endblock %}
+
+{% block content %}
+    <form action="{% url 'replicate_order' date.year date.month date.day %}" method="post">
+      {% csrf_token %}
+      {{form|crispy}}
+      <input class="btn btn-primary" type="submit" value="Replicate">
+    </form>
+{% endblock %}
