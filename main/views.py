@@ -3,6 +3,8 @@ from .forms import *
 import datetime
 from django.core.mail import send_mail
 from django.conf import settings
+from django.contrib.auth.models import User
+
 
 def home(request):
     context = {}
@@ -267,3 +269,17 @@ def replicate_order(request, year, month, day):
         form = SearchForm()
         context['form']=form
     return render(request, 'replicate_order.html', context)
+
+def user_list(request):
+    context={}
+    users = User.objects.all()
+    context['users']=users
+    return render(request, 'user_list.html', context)
+
+def user_coffees(request, user_id):
+    context={}
+    user = User.objects.get(id=user_id)
+    coffee_list = Coffee.objects.filter(user=user)
+    context['user']=user
+    context['coffee_list']=coffee_list
+    return render(request, 'user_coffees.html', context)

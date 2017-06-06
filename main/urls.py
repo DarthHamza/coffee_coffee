@@ -4,6 +4,9 @@ from . import views
 urlpatterns = [
     url(r'^home/$', views.home, name='home'),
 
+    url(r'^user_list/$', views.user_list, name='user_list'),
+    url(r'^user_coffees/(?P<user_id>[0-9]+)/$', views.user_coffees, name="user_coffees"),
+
     url(r'^create_coffee/$', views.create_coffee, name='create_coffee'),
     url(r'^edit_coffee/(?P<coffee_id>[0-9]+)/$', views.edit_coffee, name="edit_coffee"),
     url(r'^delete_coffee/(?P<coffee_id>[0-9]+)/$', views.delete_coffee, name="delete_coffee"),
