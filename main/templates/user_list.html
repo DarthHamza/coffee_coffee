@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block header %} User List {% endblock %}
+
+{% block content %}
+<h1>User List</h1>
+<table class="table table-striped">
+	<thead>
+		<tr>
+			<th>Username</th>
+			<th></th>
+		</tr>
+	</thead>
+	<tbody>
+		{% for user  in users %}
+			<tr>
+				<td>{{user}}</td>
+				<td><a href="{% url 'user_coffees' user_id=user.id %}" class="btn btn-primary pull-right"> View Coffees</a></td>
+			</tr>
+		{% endfor %}
+	</tbody>
+</table>
+{% endblock %}
