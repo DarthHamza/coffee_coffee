@@ -3,6 +3,7 @@ from . import views
 
 urlpatterns = [
     url(r'^home/$', views.home, name='home'),
+    url(r'^no_access/$', views.no_access, name='no_access'),
 
     url(r'^user_list/$', views.user_list, name='user_list'),
     url(r'^user_coffees/(?P<user_id>[0-9]+)/$', views.user_coffees, name="user_coffees"),
